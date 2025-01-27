@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prayer-service
+  labels:
+    app: prayer-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prayer-service
+  template:
+    metadata:
+      labels:
+        app: prayer-service
+    spec:
+      containers:
+      - name: prayer-service
+        image: prayer-service:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: PRAYER_API_KEY
+          value: your-api-key
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prayer-service
+spec:
+  selector:
+    app: prayer-service
+  ports:
+    - protocol: TCP
+      port: 3001
+      targetPort: 3000
+  type: ClusterIP
