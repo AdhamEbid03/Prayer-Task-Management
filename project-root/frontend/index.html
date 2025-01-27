@@ -1,18 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prayer Task Management</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task and Prayer Management</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="topnav">
-        <a class="active" href="#home">Home</a>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
-    </div>
+  <header>
+    <h1>Task and Prayer Manager</h1>
+  </header>
 
+  <main>
+    <section id="tasks">
+      <h2>Your Tasks</h2>
+      <ul id="task-list">
+        <!-- Tasks will be dynamically added here -->
+      </ul>
+      <div>
+        <input type="text" id="new-task-title" placeholder="Task title" />
+        <button id="add-task-btn">Add Task</button>
+      </div>
+    </section>
+
+    <section id="prayers">
+      <h2>Today's Prayer Times</h2>
+      <ul id="prayer-times">
+        <!-- Prayer times will be dynamically added here -->
+      </ul>
+    </section>
+
+    <section id="user-actions">
+      <h2>User Profile</h2>
+      <button id="fetch-user-btn">Get User Info</button>
+      <div id="user-info">
+        <!-- User info will be displayed here -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Task and Prayer Management App</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
