@@ -5,15 +5,15 @@ const USER_API = "http://localhost:8082/users"; // Replace with actual API URL f
 
 // Fetch and Display Tasks
 async function fetchTasks() {
-  const response = await fetch(TASK_API);
-  const tasks = await response.json();
+  const tasks = await fetchData(TASK_API);
+  if(!tasks) return;
 
   const taskList = document.getElementById("task-list");
   taskList.innerHTML = ""; // Clear the list
 
   tasks.forEach((task) => {
     const li = document.createElement("li");
-    li.textContent = `${task.title} - ${task.completed ? "Done" : "Pending"}`;
+    li.textContent = `${task.title} - ${task.completed ? "Done ✅" : "Pending ⏳"}`;
     taskList.appendChild(li);
   });
 }
@@ -36,8 +36,8 @@ async function addTask() {
 
 // Fetch and Display Prayer Times
 async function fetchPrayerTimes() {
-  const response = await fetch(PRAYER_API);
-  const prayers = await response.json();
+  const prayers = await fetchData(PRAYER_API);
+  if(!prayers) return;
 
   const prayerList = document.getElementById("prayer-times");
   prayerList.innerHTML = ""; // Clear the list
@@ -51,21 +51,34 @@ async function fetchPrayerTimes() {
 
 // Fetch and Display User Info
 async function fetchUserInfo() {
-  const response = await fetch(USER_API + "/1"); // Replace with the actual user ID
-  const user = await response.json();
+  const user = await fetchData(USER_API + "/1"); // Replace with the actual user ID
+  if(!user) return;
 
   const userInfoDiv = document.getElementById("user-info");
   userInfoDiv.innerHTML = `
-    <p>Username: ${user.username}</p>
-    <p>Email: ${user.email}</p>
-    <p>Location: ${user.location}</p>
+    <p><strong>Username:</strong> ${user.username}</p>
+    <p><strong>Email:</strong> ${user.email}</p>
+    <p><strong>Location:</strong> ${user.location}</p>
   `;
 }
 
+async function fetchData(url) {
+  try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+      return await response.json();
+  } catch (error) {
+      console.error("Error fetching data:", error);
+      return null;
+  }
+}
+
 // Event Listeners
+document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("add-task-btn").addEventListener("click", addTask);
 document.getElementById("fetch-user-btn").addEventListener("click", fetchUserInfo);
 
 // Initial Fetch
 fetchTasks();
 fetchPrayerTimes();
+});
