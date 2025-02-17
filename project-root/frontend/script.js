@@ -13,9 +13,31 @@ async function fetchTasks() {
 
   tasks.forEach((task) => {
     const li = document.createElement("li");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = task.completed;
+    checkbox.addEventListener("change", () => updateTaskStatus(task.id, checkbox.checked));
+
+    const taskText = document.createElement("span");
     li.textContent = `${task.title} - ${task.completed ? "Done ✅" : "Pending ⏳"}`;
+
+    li.appendChild(checkbox);
+    li.appendChild(document.createTextNode(` ${task.title}`));
+
+
     taskList.appendChild(li);
   });
+}
+
+async function updateTaskStatus(taskId, isCompleted) {
+  await fetch(`${TASK_API}/${taskId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ completed: isCompleted }),
+  });
+
+  fetchTasks(); // Refresh the task list
 }
 
 // Add a New Task
@@ -36,18 +58,43 @@ async function addTask() {
 
 // Fetch and Display Prayer Times
 async function fetchPrayerTimes() {
-  const prayers = await fetchData(PRAYER_API);
-  if(!prayers) return;
+  try {
+      const prayers = await fetchData(PRAYER_API);
+      if (!prayers) return;
 
-  const prayerList = document.getElementById("prayer-times");
-  prayerList.innerHTML = ""; // Clear the list
+      console.log("Prayer API Response:", prayers); // Debugging log
 
-  for (const [prayer, time] of Object.entries(prayers)) {
-    const li = document.createElement("li");
-    li.textContent = `${prayer}: ${time}`;
-    prayerList.appendChild(li);
+      const prayerList = document.getElementById("prayer-times");
+      prayerList.innerHTML = ""; // Clear the list
+
+      // Display City and Country
+      const cityItem = document.createElement("li");
+      cityItem.textContent = `City: ${prayers.city || "N/A"}`;
+      prayerList.appendChild(cityItem);
+
+      const countryItem = document.createElement("li");
+      countryItem.textContent = `Country: ${prayers.country || "N/A"}`;
+      prayerList.appendChild(countryItem);
+
+      // Check if prayerTimes exists and is an object
+      if (prayers.prayerTimes && typeof prayers.prayerTimes === "object") {
+          for (const [prayer, time] of Object.entries(prayers.prayerTimes)) {
+              const li = document.createElement("li");
+              li.textContent = `${prayer}: ${time}`;
+              prayerList.appendChild(li);
+          }
+      } else {
+          const errorItem = document.createElement("li");
+          errorItem.textContent = "Error: No prayer times found";
+          prayerList.appendChild(errorItem);
+      }
+
+  } catch (error) {
+      console.error("Error fetching prayer times:", error);
   }
 }
+
+
 
 // Fetch and Display User Info
 async function fetchUserInfo() {
