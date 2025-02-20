@@ -16,12 +16,12 @@ spec:
     spec:
       containers:
       - name: prayer-service
-        image: prayer-service:latest
+        image: adham/prayer-service:latest
         ports:
         - containerPort: 3000
         env:
-        - name: PRAYER_API_KEY
-          value: your-api-key
+        - name: MONGO_URI
+          value: mongodb://mongodb:27017/prayerdb
 ---
 apiVersion: v1
 kind: Service

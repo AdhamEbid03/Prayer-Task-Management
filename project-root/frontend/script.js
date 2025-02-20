@@ -1,7 +1,7 @@
 // Mock API Endpoints
-const TASK_API = "http://localhost:8081/tasks"; // Replace with actual API URL for Task Service
-const PRAYER_API = "http://localhost:3001/prayers"; // Replace with actual API URL for Prayer Service
-const USER_API = "http://localhost:8082/users"; // Replace with actual API URL for User Service
+const TASK_API = "http://16.171.138.189:30081/tasks";
+const PRAYER_API = "http://16.171.138.189:30083/prayers";
+const USER_API = "http://16.171.138.189:30082/users";
 
 // Fetch and Display Tasks
 async function fetchTasks() {

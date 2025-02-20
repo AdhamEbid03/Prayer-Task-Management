@@ -1,8 +1,18 @@
-# syntax=docker/dockerfile:1
+# Use an official Node.js runtime as the base image
+FROM node:18
 
-FROM node:18-alpine
+# Set the working directory
 WORKDIR /app
+
+# Copy package.json and install dependencies
+COPY package.json ./
+RUN npm install
+
+# Copy the rest of the application
 COPY . .
-RUN yarn install --production
+
+# Expose the port
+EXPOSE 3001
+
+# Start the service
 CMD ["node", "src/index.js"]
-EXPOSE 3000

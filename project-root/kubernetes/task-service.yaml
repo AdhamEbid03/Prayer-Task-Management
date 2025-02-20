@@ -16,16 +16,16 @@ spec:
     spec:
       containers:
       - name: task-service
-        image: task-service:latest
+        image: adham/task-service:latest
         ports:
         - containerPort: 8080
         env:
         - name: SPRING_DATASOURCE_URL
           value: jdbc:postgresql://task-db:5432/taskdb
         - name: SPRING_DATASOURCE_USERNAME
-          value: yourusername
+          value: adham
         - name: SPRING_DATASOURCE_PASSWORD
-          value: yourpassword
+          value: mcse1234
 ---
 apiVersion: v1
 kind: Service

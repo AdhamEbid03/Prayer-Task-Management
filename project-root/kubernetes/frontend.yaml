@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: frontend:latest
+        image: adham/frontend:latest
         ports:
         - containerPort: 3000
 ---
