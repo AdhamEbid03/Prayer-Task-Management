@@ -1,15 +1,4 @@
 services:
-  task-service:
-    build: ./task-service
-    ports:
-      - "8081:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/taskdb
-      SPRING_DATASOURCE_USERNAME: adham
-      SPRING_DATASOURCE_PASSWORD: mcse1234
-    depends_on:
-      - postgres
-
   user-service:
     build: ./user-service
     ports:

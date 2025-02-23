@@ -1,60 +1,6 @@
 // Mock API Endpoints
-const TASK_API = "http://16.171.138.189:30081/tasks";
-const PRAYER_API = "http://16.171.138.189:30083/prayers";
+const PRAYER_API = "http://localhost:3001/prayers";
 const USER_API = "http://16.171.138.189:30082/users";
-
-// Fetch and Display Tasks
-async function fetchTasks() {
-  const tasks = await fetchData(TASK_API);
-  if(!tasks) return;
-
-  const taskList = document.getElementById("task-list");
-  taskList.innerHTML = ""; // Clear the list
-
-  tasks.forEach((task) => {
-    const li = document.createElement("li");
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked = task.completed;
-    checkbox.addEventListener("change", () => updateTaskStatus(task.id, checkbox.checked));
-
-    const taskText = document.createElement("span");
-    li.textContent = `${task.title} - ${task.completed ? "Done ✅" : "Pending ⏳"}`;
-
-    li.appendChild(checkbox);
-    li.appendChild(document.createTextNode(` ${task.title}`));
-
-
-    taskList.appendChild(li);
-  });
-}
-
-async function updateTaskStatus(taskId, isCompleted) {
-  await fetch(`${TASK_API}/${taskId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ completed: isCompleted }),
-  });
-
-  fetchTasks(); // Refresh the task list
-}
-
-// Add a New Task
-async function addTask() {
-  const taskTitle = document.getElementById("new-task-title").value;
-
-  if (taskTitle) {
-    await fetch(TASK_API, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title: taskTitle, completed: false }),
-    });
-
-    fetchTasks(); // Refresh the task list
-    document.getElementById("new-task-title").value = ""; // Clear the input
-  }
-}
 
 // Fetch and Display Prayer Times
 async function fetchPrayerTimes() {
@@ -94,8 +40,6 @@ async function fetchPrayerTimes() {
   }
 }
 
-
-
 // Fetch and Display User Info
 async function fetchUserInfo() {
   const user = await fetchData(USER_API + "/1"); // Replace with the actual user ID
@@ -122,10 +66,8 @@ async function fetchData(url) {
 
 // Event Listeners
 document.addEventListener("DOMContentLoaded", () => {
-document.getElementById("add-task-btn").addEventListener("click", addTask);
 document.getElementById("fetch-user-btn").addEventListener("click", fetchUserInfo);
 
 // Initial Fetch
-fetchTasks();
 fetchPrayerTimes();
 });

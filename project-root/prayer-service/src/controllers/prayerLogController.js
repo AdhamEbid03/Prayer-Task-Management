@@ -1,21 +1,32 @@
 const PrayerLog = require("../models/prayerLogModel");
+const mongoose = require("mongoose");
 
 // Log Completed Prayer
 const logPrayer = async (req, res) => {
   try {
-    const { userId, prayerName, completedAt } = req.body;
+      const { userId, prayerName, completedAt } = req.body;
 
-    if (!userId || !prayerName || !completedAt) {
-      return res.status(400).json({ error: "Missing required fields" });
-    }
+      // Check if all required fields are provided
+      if (!userId || !prayerName || !completedAt) {
+          return res.status(400).json({ error: "Missing required fields" });
+      }
 
-    const newLog = new PrayerLog({ userId, prayerName, completedAt });
-    await newLog.save();
+      // Convert completedAt to Date object
+      const completedAtDate = new Date(completedAt);
 
-    res.status(201).json({ message: "Prayer logged successfully", newLog });
+      // Check if MongoDB is connected
+      if (!mongoose.connection.readyState) {
+          return res.status(500).json({ error: "Database connection issue" });
+      }
+
+      // Save the new log
+      const newLog = new PrayerLog({ userId, prayerName, completedAt: completedAtDate });
+      await newLog.save();
+
+      res.status(201).json({ message: "Prayer logged successfully", newLog });
   } catch (error) {
-    console.error("Error logging prayer:", error.message);
-    res.status(500).json({ error: "Failed to log prayer" });
+      console.error("Error logging prayer:", error.message);
+      res.status(500).json({ error: "Failed to log prayer" });
   }
 };
 
