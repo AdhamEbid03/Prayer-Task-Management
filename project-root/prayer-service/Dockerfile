@@ -5,8 +5,8 @@ FROM node:18
 WORKDIR /app
 
 # Copy package.json and install dependencies
-COPY package.json ./
-RUN npm install
+COPY package.json package-lock.json ./
+RUN npm ci --production
 
 # Copy the rest of the application
 COPY . .

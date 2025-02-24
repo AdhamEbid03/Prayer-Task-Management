@@ -2,10 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: user-service
-  labels:
-    app: user-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: user-service
@@ -16,12 +14,12 @@ spec:
     spec:
       containers:
       - name: user-service
-        image: adham/user-service:latest
+        image: hopemcsese/user-service:latest
         ports:
         - containerPort: 8080
         env:
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:postgresql://:5432/taskdb
+          value: jdbc:postgresql://10.255.200.52:5432/taskdb
         - name: SPRING_DATASOURCE_USERNAME
           value: adham
         - name: SPRING_DATASOURCE_PASSWORD
@@ -32,10 +30,9 @@ kind: Service
 metadata:
   name: user-service
 spec:
+  type: ClusterIP
+  ports:
+    - port: 8082
+      targetPort: 8080
   selector:
     app: user-service
-  ports:
-    - protocol: TCP
-      port: 8082
-      targetPort: 8080
-  type: ClusterIP

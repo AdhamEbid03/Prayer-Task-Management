@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/", getPrayerTimes);
 
 // Log completed prayer
-router.post("/log", logPrayer);
+router.post("/logPrayer", logPrayer);
 
 // Get user prayer logs
 router.get("/log", getPrayerLogs);

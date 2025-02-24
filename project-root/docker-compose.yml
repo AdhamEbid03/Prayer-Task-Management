@@ -2,20 +2,22 @@ services:
   user-service:
     build: ./user-service
     ports:
-      - "8082:8080"
+      - "8082:8082"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/taskdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://16.171.138.189:5432/taskdb
       SPRING_DATASOURCE_USERNAME: adham
       SPRING_DATASOURCE_PASSWORD: mcse1234
     depends_on:
       - postgres
+    networks:
+      - backend
 
   prayer-service:
     build: ./prayer-service
     ports:
       - "3001:3001"
     environment:
-      MONGO_URI: "mongodb://mongo:27017/prayerDB"
+      MONGO_URI: "mongodb://16.171.138.189:27017/prayerDB"
       API_URL: "https://api.aladhan.com/v1/timingsByCity"
     depends_on:
       - mongo
@@ -26,6 +28,8 @@ services:
     build: ./frontend
     ports:
       - "3000:3000"
+    networks:
+      - backend
 
   postgres:
     image: postgres:17.3
@@ -39,6 +43,8 @@ services:
       POSTGRES_PASSWORD: mcse1234
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
 
   mongo:
     image: mongo:6.0

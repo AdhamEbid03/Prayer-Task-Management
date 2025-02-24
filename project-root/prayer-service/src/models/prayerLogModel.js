@@ -6,4 +6,4 @@ const PrayerLogSchema = new mongoose.Schema({
   completedAt: { type: Date, required: true }
 });
 
-module.exports = mongoose.model("PrayerLog", PrayerLogSchema);
+module.exports = mongoose.model("prayerlog", PrayerLogSchema);
