@@ -1,4 +1,4 @@
-package com.PrayerTaskManagement.userservice;
+package com.PrayerTaskManagement.userprayerservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

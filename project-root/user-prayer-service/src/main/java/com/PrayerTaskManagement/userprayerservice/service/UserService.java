@@ -1,7 +1,7 @@
-package com.PrayerTaskManagement.userservice.service;
+package com.PrayerTaskManagement.userprayerservice.service;
 
-import com.PrayerTaskManagement.userservice.model.User;
-import com.PrayerTaskManagement.userservice.repository.UserRepository;
+import com.PrayerTaskManagement.userprayerservice.model.User;
+import com.PrayerTaskManagement.userprayerservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

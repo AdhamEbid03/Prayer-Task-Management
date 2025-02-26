@@ -1,4 +1,4 @@
-package com.PrayerTaskManagement.userservice.model;
+package com.PrayerTaskManagement.userprayerservice.model;
 
 import jakarta.persistence.*;
 import lombok.*;

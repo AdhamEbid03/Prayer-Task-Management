@@ -1,4 +1,4 @@
-package com.PrayerTaskManagement.userservice.config;
+package com.PrayerTaskManagement.userprayerservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

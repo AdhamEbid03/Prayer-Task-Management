@@ -1,4 +1,4 @@
-package com.PrayerTaskManagement.userservice;
+package com.PrayerTaskManagement.userprayerservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,7 +1,7 @@
-package com.PrayerTaskManagement.userservice.controller;
+package com.PrayerTaskManagement.userprayerservice.controller;
 
-import com.PrayerTaskManagement.userservice.model.User;
-import com.PrayerTaskManagement.userservice.service.UserService;
+import com.PrayerTaskManagement.userprayerservice.model.User;
+import com.PrayerTaskManagement.userprayerservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
