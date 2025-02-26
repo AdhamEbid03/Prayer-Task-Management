@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service
+  name: user-prayer-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: user-service
+      app: user-prayer-service
   template:
     metadata:
       labels:
-        app: user-service
+        app: user-prayer-service
     spec:
       containers:
-      - name: user-service
-        image: hopemcsese/user-service:latest
+      - name: user-prayer-service
+        image: hopemcsese/user-prayer-service:latest
         ports:
         - containerPort: 8080
         env:
@@ -28,11 +28,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-service
+  name: user-prayer-service
 spec:
   type: ClusterIP
   ports:
     - port: 8082
       targetPort: 8080
   selector:
-    app: user-service
+    app: user-prayer-service

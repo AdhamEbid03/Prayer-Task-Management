@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.PrayerTaskManagement</groupId>
-	<artifactId>user-service</artifactId>
+	<artifactId>user-prayer-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>user-service</name>
+	<name>user-prayer-service</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
